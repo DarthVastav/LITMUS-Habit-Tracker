@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Litmus</title>
+    <meta name="description" content="Your habits, classes and deadlines as one reading — and the whole app changes colour with the result." />
+    <meta name="theme-color" content="#08090e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Litmus" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <style>
+      /* Pre-React splash. Mirrors the app shell's sizing rule so the first
+         paint and the mounted app agree: full width on phones, 430px frame
+         from 600px up. Replaced as soon as the bundle runs. */
+      :root { --shellMax: 100%; }
+      @media (min-width: 600px) { :root { --shellMax: 430px; } }
+      body { margin: 0; background: #08090e; display: flex; justify-content: center; }
+      #root { width: 100%; max-width: var(--shellMax); min-height: 100dvh; }
+      .boot {
+        width: 100%; max-width: var(--shellMax); height: 100dvh;
+        display: flex; align-items: center; justify-content: center;
+        background:
+          radial-gradient(120% 55% at 15% -5%, #10131c, transparent 60%),
+          radial-gradient(90% 45% at 100% 105%, #10131c, transparent 55%), #08090e;
+        font-family: 'Instrument Serif', Georgia, serif;
+        font-size: 42px; color: #dfe3ee; letter-spacing: 0.5px;
+        animation: bootPulse 1.6s ease-in-out infinite;
+      }
+      @keyframes bootPulse { 0%,100% { opacity: 0.55; } 50% { opacity: 1; } }
+    </style>
+    <div id="root"><div class="boot"><i>Litmus</i></div></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

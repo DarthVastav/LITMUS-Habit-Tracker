@@ -1,0 +1,47 @@
+/* Phone-class screens get the full viewport; the 430px phone-frame only
+   applies on genuinely wide screens (desktop), where an unbounded stretch
+   would wreck the layout. Some large phones report 450–500 CSS px, which
+   is why a flat 430px cap showed black bars on real devices. */
+:root { --shellMax: 100%; }
+@media (min-width: 600px) { :root { --shellMax: 430px; } }
+
+/* Android paints a translucent blue box over anything tapped; it fights
+   the glass aesthetic on every press. Keyboard users keep a visible focus
+   ring via :focus-visible — only the touch flash goes. */
+* { -webkit-tap-highlight-color: transparent; }
+:focus:not(:focus-visible) { outline: none; }
+:focus-visible { outline: 2px solid var(--acc, #7c9eff); outline-offset: 2px; }
+
+body {
+  margin: 0;
+  background: #08090e;
+  display: flex;
+  justify-content: center;
+  -webkit-font-smoothing: antialiased;
+}
+* { box-sizing: border-box; }
+input, button { font-family: inherit; }
+input::placeholder { color: inherit; opacity: 0.4; }
+a { color: inherit; }
+a:hover { opacity: 0.75; }
+button { cursor: pointer; }
+::-webkit-scrollbar { display: none; }
+
+/* Visible keyboard focus without a focus ring on pointer taps. */
+:focus-visible {
+  outline: 2px solid var(--acc);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+
+@keyframes drift  { 0%,100% { transform: translate(0,0); }   50% { transform: translate(26px,-20px); } }
+@keyframes drift2 { 0%,100% { transform: translate(0,0); }   50% { transform: translate(-22px,16px); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,19 @@
+name = "litmus"
+main = "worker/index.js"
+compatibility_date = "2025-05-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Vite's build output is served directly by Cloudflare's asset router.
+# single-page-application means every unmatched path returns index.html,
+# which is what the app's client-side routing needs.
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+
+# Reminder dispatcher — every 15 minutes, same cadence as before.
+[triggers]
+crons = ["*/15 * * * *"]
+
+[observability]
+enabled = true
